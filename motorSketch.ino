@@ -40,14 +40,24 @@ void setup()
  */ 
 
 void loop(){
-  
+  delay(1000);
+  Serial.println("Attente d'appui sur le bouton...");
+
+  while(not isSwitchClosed(pinSwitch))
+  {
+    //wait
+  }
+
+  Serial.println("Appui sur bouton détecté");
+  delay(1000);
+
+  Serial.println("Début Rotation sens 1");
   // Avance de 200 pas lentement
   stepForward(200, 10);
-
   delay(1000); //on attend une seconde
-  
-  // Refaire 200 pas dans l'autre sens repidement
-  stepBackwards(200, 1);
+  Serial.println("Début Rotation sens 2");
+  // Refaire 400 pas dans l'autre sens repidement
+  stepBackwards(400, 1);
   
   // Pas de step et pas d'ordre... 
   // l'axe du moteur est donc bloqué 
@@ -66,15 +76,16 @@ void loop(){
   Serial.println("Attente de consigne 'Serial'...");
   while( true )
   {
-    if(readSerialInput() == 1)
+    int input = readSerialInput();
+    if(input == 1)
     {
       Serial.println("J'ai reçu la consigne 1");
     }
-    else if(readSerialInput() == 2)
+    else if(input == 2)
     {
       Serial.println("J'ai reçu la consigne 2");
     }
-    else if(readSerialInput() == 3)
+    else if(input == 3)
     {
       Serial.println("J'ai reçu la consigne 3");
     }
