@@ -98,6 +98,7 @@ void loop(){
  * ======================================================================================
  */ 
 
+// Fait tourner le moteur dans le sens horaire
 void stepForward(int numberOfSteps, int delayBetweenSteps)
 {
   if(!isMotorEnabled)
@@ -113,6 +114,7 @@ void stepForward(int numberOfSteps, int delayBetweenSteps)
   } 
 }
 
+// Fait tourner le moteur dans le sens anti-horaire
 void stepBackwards(int numberOfSteps, int delayBetweenSteps)
 {
   if(!isMotorEnabled)
@@ -128,6 +130,7 @@ void stepBackwards(int numberOfSteps, int delayBetweenSteps)
   } 
 }
 
+// Déplace le moteur d'un step (avec un délai de step spécifié)
 void makeOneStep(int delayBetweenSteps)
 {
     digitalWrite( pinStep, HIGH );
@@ -136,23 +139,27 @@ void makeOneStep(int delayBetweenSteps)
     delay(delayBetweenSteps);
 }
 
+// Bloque l'axe moteur et prépare le moteur à recevoir des consignes
 bool enableMotor()
 {
   digitalWrite( pinEnable, LOW );
   isMotorEnabled = true; 
 }
 
+// Libère l'axe moteur et empêche le moteur de recevoir des consignes
 bool disableMotor()
 {
   digitalWrite( pinEnable, HIGH );
   isMotorEnabled = false; 
 }
 
+// Vérifie que si le bouton est activé ou non
 bool isSwitchClosed(int switchPin)
 {
   return digitalRead(switchPin) == LOW;
 }
 
+// Permet de lire des nombres envoyés via l'afficheur Serial et d'interragir avec le code
 int readSerialInput()
 {
   if(Serial.available() > 0)
